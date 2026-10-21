@@ -14,8 +14,7 @@ A learning-focused project to design, build, document, and deploy a web-based in
 
 - Python
 - Flask
-- HTML and CSS (Bootstrap may be evaluated later)
-- MySQL or MariaDB (final choice pending)
-- Git and GitHub
+- HTML and CSS
+- SQL
 - Ubuntu Server for eventual deployment
 
