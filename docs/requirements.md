@@ -17,7 +17,7 @@ The initial version will support inventory management for:
 - General PC hardware and peripherals
 - Networking equipment
 
-Complete systems will be registered as individual inventory items. Loose components can also be registered individually. Tracking the relationship between installed components and complete systems is not currently required.
+Complete systems will be registered as individual inventory items. Loose components can also be registered individually. Complete systems and their individual components will be registered as inventory items. The `SYSTEM_COMPONENT` relationship will track which items are installed in or belong to a complete system. Each component can be assigned to at most one system, and an item cannot be linked to itself.
 
 ## 3. Functional Requirements
 
@@ -49,7 +49,7 @@ The application shall support the following fields:
 | Specifications | Optional |
 | Working condition | Required |
 | Additional notes | Optional |
-| Quantity | To be determined during database design |
+| Quantity | Required; must be a positive integer greater than zero |
 
 The working condition shall support four values:
 
@@ -60,7 +60,7 @@ The working condition shall support four values:
 
 Additional notes can describe defects, testing results, or other relevant information.
 
-Specifications should accommodate different types of hardware without requiring every item to have the same technical fields.
+Specifications would be stored separately from the main inventory record in a related table. Each specification would have a type and exactly one value, stored as either text or a numeric value. A unit may optionally be recorded for numeric specifications. Each item may have multiple specifications, but each specification type may appear only once per item.
 
 ### Purchase Price and Cost Tracking
 
@@ -103,7 +103,7 @@ The project is intended to use:
 - Python for application logic.
 - Flask for the web application backend.
 - HTML and CSS for the user interface.
-- MySQL or MariaDB for relational data storage; the final choice remains undecided.
+- MySQL Server 8.0.46 for relational data storage.
 - Git and GitHub for version control and project hosting.
 
 Development and initial testing will take place locally on the user's Windows PC. The application will subsequently be deployed to the Ubuntu homelab server for occasional testing.
@@ -122,22 +122,18 @@ The application should avoid unnecessary exposure of the database and should use
 
 Development will proceed incrementally:
 
-1. Finalize requirements and database design.
-2. Implement the database and test it with sample records.
+1. Finalize and document requirements and database design.
+2. Implement the database schema and validate constraints using test records.
 3. Build the Flask backend.
 4. Develop the browser interface.
 5. Implement inventory management, search, sorting, filtering, and dashboard functionality.
 6. Test locally and resolve issues.
-7. Deploy a test version to the Ubuntu server.
-8. Update documentation to reflect the implemented system.
+7. Deploy a test version to the Ubuntu homelab server.
 
 ## 7. Open Design Decisions
 
 The following details remain to be determined during design:
 
-- How flexible technical specifications will be stored in the database.
 - How quantities and purchase prices will work for grouped items.
-- The final relational schema, including category relationships.
 - Whether estimated current value will be added in a later version.
 - The exact dashboard layout.
-- The final database engine choice.
